@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77399E3523CD046900726CA0 /* BoardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77399E3423CD046900726CA0 /* BoardViewCell.swift */; };
+		779450DA23CCFA7200490554 /* GameStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779450D923CCFA7200490554 /* GameStateMachine.swift */; };
 		C97953AF23BA3F0A00ED89FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97953AE23BA3F0A00ED89FB /* AppDelegate.swift */; };
 		C97953B123BA3F0A00ED89FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97953B023BA3F0A00ED89FB /* SceneDelegate.swift */; };
-		C97953B323BA3F0A00ED89FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97953B223BA3F0A00ED89FB /* ViewController.swift */; };
+		C97953B323BA3F0A00ED89FB /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97953B223BA3F0A00ED89FB /* BoardViewController.swift */; };
 		C97953B623BA3F0A00ED89FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C97953B423BA3F0A00ED89FB /* Main.storyboard */; };
 		C97953B823BA3F1A00ED89FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C97953B723BA3F1A00ED89FB /* Assets.xcassets */; };
 		C97953BB23BA3F1A00ED89FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C97953B923BA3F1A00ED89FB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77399E3423CD046900726CA0 /* BoardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewCell.swift; sourceTree = "<group>"; };
+		779450D923CCFA7200490554 /* GameStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateMachine.swift; sourceTree = "<group>"; };
 		C97953AB23BA3F0A00ED89FB /* tic-tac-toe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tic-tac-toe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97953AE23BA3F0A00ED89FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C97953B023BA3F0A00ED89FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C97953B223BA3F0A00ED89FB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C97953B223BA3F0A00ED89FB /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		C97953B523BA3F0A00ED89FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C97953B723BA3F1A00ED89FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C97953BA23BA3F1A00ED89FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,11 +62,13 @@
 			children = (
 				C97953AE23BA3F0A00ED89FB /* AppDelegate.swift */,
 				C97953B023BA3F0A00ED89FB /* SceneDelegate.swift */,
-				C97953B223BA3F0A00ED89FB /* ViewController.swift */,
+				C97953B223BA3F0A00ED89FB /* BoardViewController.swift */,
 				C97953B423BA3F0A00ED89FB /* Main.storyboard */,
 				C97953B723BA3F1A00ED89FB /* Assets.xcassets */,
 				C97953B923BA3F1A00ED89FB /* LaunchScreen.storyboard */,
 				C97953BC23BA3F1A00ED89FB /* Info.plist */,
+				779450D923CCFA7200490554 /* GameStateMachine.swift */,
+				77399E3423CD046900726CA0 /* BoardViewCell.swift */,
 			);
 			path = "tic-tac-toe";
 			sourceTree = "<group>";
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C97953B323BA3F0A00ED89FB /* ViewController.swift in Sources */,
+				C97953B323BA3F0A00ED89FB /* BoardViewController.swift in Sources */,
+				77399E3523CD046900726CA0 /* BoardViewCell.swift in Sources */,
+				779450DA23CCFA7200490554 /* GameStateMachine.swift in Sources */,
 				C97953AF23BA3F0A00ED89FB /* AppDelegate.swift in Sources */,
 				C97953B123BA3F0A00ED89FB /* SceneDelegate.swift in Sources */,
 			);
