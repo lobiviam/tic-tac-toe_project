@@ -15,6 +15,7 @@
 		C97953B623BA3F0A00ED89FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C97953B423BA3F0A00ED89FB /* Main.storyboard */; };
 		C97953B823BA3F1A00ED89FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C97953B723BA3F1A00ED89FB /* Assets.xcassets */; };
 		C97953BB23BA3F1A00ED89FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C97953B923BA3F1A00ED89FB /* LaunchScreen.storyboard */; };
+		C9A5AD3623CDFA40008E0ABC /* SupportingStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A5AD3523CDFA40008E0ABC /* SupportingStructures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C97953B723BA3F1A00ED89FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C97953BA23BA3F1A00ED89FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C97953BC23BA3F1A00ED89FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9A5AD3523CDFA40008E0ABC /* SupportingStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportingStructures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				C97953BC23BA3F1A00ED89FB /* Info.plist */,
 				779450D923CCFA7200490554 /* GameStateMachine.swift */,
 				77399E3423CD046900726CA0 /* BoardViewCell.swift */,
+				C9A5AD3523CDFA40008E0ABC /* SupportingStructures.swift */,
 			);
 			path = "tic-tac-toe";
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			files = (
 				C97953B323BA3F0A00ED89FB /* BoardViewController.swift in Sources */,
 				77399E3523CD046900726CA0 /* BoardViewCell.swift in Sources */,
+				C9A5AD3623CDFA40008E0ABC /* SupportingStructures.swift in Sources */,
 				779450DA23CCFA7200490554 /* GameStateMachine.swift in Sources */,
 				C97953AF23BA3F0A00ED89FB /* AppDelegate.swift in Sources */,
 				C97953B123BA3F0A00ED89FB /* SceneDelegate.swift in Sources */,

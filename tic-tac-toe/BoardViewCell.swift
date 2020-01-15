@@ -11,5 +11,5 @@ import UIKit
 class BoardViewCell: UICollectionViewCell {
     
     @IBOutlet weak var textLabel: UILabel!
-    
+    var playerId = 0 
 }
