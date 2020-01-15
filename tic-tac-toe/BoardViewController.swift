@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BoardViewController: UIViewController {
+class BoardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var boardCollectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,10 +19,18 @@ class BoardViewController: UIViewController {
     var secondPlayer = Player()
     
     override func viewDidLoad() {
-        performInitialSetup()
         super.viewDidLoad()
+        performInitialSetup()
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical
+        
         boardCollectionView.dataSource = self
         boardCollectionView.delegate = self
+        boardCollectionView.collectionViewLayout = flowLayout
     }
     
     private func performInitialSetup() {
@@ -35,10 +43,6 @@ class BoardViewController: UIViewController {
         secondPlayer.isHisTurn = false
         secondPlayer.playerId = 2
     }
-
-}
-
-extension BoardViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return gameDimension == 0 ? defaultGameDimension : gameDimension
