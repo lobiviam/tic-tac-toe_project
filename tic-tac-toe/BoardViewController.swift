@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BoardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class BoardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var boardCollectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -23,9 +23,7 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
         performInitialSetup()
         
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
-        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 30, bottom: 20, right: 30)
         flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical
         
         boardCollectionView.dataSource = self
@@ -54,13 +52,16 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = boardCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: BoardViewCell.self), for: indexPath) as! BoardViewCell
+        cell.layer.borderWidth = 2.0
+        cell.layer.borderColor = UIColor.white.cgColor
         cell.textLabel.text = ""
         cell.playerId = 0
+
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: ((collectionView.bounds.width - 15) / CGFloat(gameDimension)), height: (collectionView.bounds.size.height - 15) / CGFloat(gameDimension))
+        return CGSize(width: ((collectionView.bounds.width - 60 - 40) / CGFloat(defaultGameDimension)), height: (collectionView.bounds.size.height - 40 - 40) / CGFloat(defaultGameDimension))
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
