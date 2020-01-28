@@ -80,6 +80,119 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
                 secondPlayer.isHisTurn = false
                 firstPlayer.isHisTurn = true
             }
+            checkResults()
+            updateLabel()
+        }
+    }
+    
+    func updateLabel() {
+        if firstPlayer.didHeWin {
+            titleLabel.text = firstPlayer.sign.rawValue + " Win"
+        } else if secondPlayer.didHeWin {
+            titleLabel.text = firstPlayer.sign.rawValue + " Win"
+        } else {
+            if firstPlayer.isHisTurn {
+                titleLabel.text = firstPlayer.sign.rawValue + "'s Turn"
+            } else {
+                titleLabel.text = secondPlayer.sign.rawValue + "'s Turn"
+            }
+        }
+    }
+    
+    func checkResults() {
+        var resultP1 = true
+        var resultP2 = true
+        
+        //Horizontal Check
+        for column in 0...Int(defaultGameDimension - 1) {
+            for row in 0...Int(defaultGameDimension - 1) {
+                let cell = boardCollectionView.cellForItem(at: IndexPath.init(row: row, section: column)) as? BoardViewCell
+                if cell?.playerId != firstPlayer.playerId {
+                    resultP1 = false
+                }
+                if cell?.playerId != secondPlayer.playerId {
+                    resultP2 = false
+                }
+            }
+                if resultP1 {
+                    firstPlayer.didHeWin = true
+                    return
+                } else if resultP2 {
+                    secondPlayer.didHeWin = true
+                    return
+                } else {
+                    resultP1 = true
+                    resultP2 = true
+                }
+        }
+        
+        //Vertical Check
+        for row in 0...Int(defaultGameDimension - 1) {
+            for column in 0...Int(defaultGameDimension - 1) {
+                let cell = boardCollectionView.cellForItem(at: IndexPath.init(row: row, section: column)) as? BoardViewCell
+                if cell?.playerId != firstPlayer.playerId {
+                    resultP1 = false
+                }
+                if cell?.playerId != secondPlayer.playerId {
+                    resultP2 = false
+                }
+            }
+            
+            if resultP1 {
+                firstPlayer.didHeWin = true
+                return
+            } else if resultP2 {
+                secondPlayer.didHeWin = true
+                return
+            } else {
+                resultP1 = true
+                resultP2 = true
+            }
+        }
+        
+        //Right Diagonal Check
+        for row in 0...Int(defaultGameDimension - 1) {
+            let cell = boardCollectionView.cellForItem(at: IndexPath.init(row: row, section: row)) as?BoardViewCell
+            if cell?.playerId != firstPlayer.playerId {
+                resultP1 = false
+                return
+            }
+            
+            if cell?.playerId != secondPlayer.playerId {
+                resultP2 = false
+                return
+            }
+        }
+        if resultP1 {
+            firstPlayer.didHeWin = true
+            return
+        } else if resultP2 {
+            secondPlayer.didHeWin = true
+            return
+        } else {
+            resultP1 = true
+            resultP2 = true
+        }
+        
+        // Left Diagonal Check
+        for row in 0...Int(defaultGameDimension - 1) {
+            let cell = boardCollectionView.cellForItem(at: IndexPath.init(row: row, section: Int(defaultGameDimension - 1) - row)) as? BoardViewCell
+            if cell?.playerId != firstPlayer.playerId {
+                resultP1 = false
+            }
+            if cell?.playerId != secondPlayer.playerId {
+                resultP2 = false
+            }
+        }
+        if resultP1 {
+            firstPlayer.didHeWin = true
+            return
+        } else if resultP2 {
+            secondPlayer.didHeWin = true
+            return
+        } else {
+            resultP1 = true
+            resultP2 = true
         }
     }
     
