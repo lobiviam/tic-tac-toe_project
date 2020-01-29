@@ -18,6 +18,8 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
     var firstPlayer = Player()
     var secondPlayer = Player()
     
+    var gameStateMachine = GameStateMachine.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
@@ -33,12 +35,10 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     private func performInitialSetup() {
         firstPlayer.sign = Signs.tic
-        firstPlayer.isHisTurn = true
         titleLabel.text = firstPlayer.sign.rawValue + "'s Turn"
         firstPlayer.playerId = 1
         
         secondPlayer.sign = Signs.tac
-        secondPlayer.isHisTurn = false
         secondPlayer.playerId = 2
     }
     
@@ -67,31 +67,34 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! BoardViewCell
         if cell.textLabel.text == "" {
-            if firstPlayer.isHisTurn {
+            if gameStateMachine.gameState == .firstTurn {
                 cell.textLabel.text = "❌"
                 cell.playerId = firstPlayer.playerId
                 firstPlayer.positions.append(indexPath)
-                firstPlayer.isHisTurn = false
-                secondPlayer.isHisTurn = true
+                gameStateMachine.gameState = .secondTurn
             } else {
                 cell.textLabel.text = "⭕️"
                 cell.playerId = secondPlayer.playerId
                 secondPlayer.positions.append(indexPath)
-                secondPlayer.isHisTurn = false
-                firstPlayer.isHisTurn = true
+                gameStateMachine.gameState = .firstTurn
             }
             checkResults()
             updateLabel()
         }
+        if firstPlayer.positions.count + secondPlayer.positions.count == Int(defaultGameDimension) * Int(defaultGameDimension) {
+            if gameStateMachine.gameState != .firstWin || gameStateMachine.gameState != .secondWin {
+                gameStateMachine.gameState = .tie
+            }
+        }
     }
     
     func updateLabel() {
-        if firstPlayer.didHeWin {
+        if gameStateMachine.gameState == .firstWin {
             titleLabel.text = firstPlayer.sign.rawValue + " Win"
-        } else if secondPlayer.didHeWin {
+        } else if gameStateMachine.gameState == .secondWin {
             titleLabel.text = firstPlayer.sign.rawValue + " Win"
         } else {
-            if firstPlayer.isHisTurn {
+            if gameStateMachine.gameState == .firstTurn {
                 titleLabel.text = firstPlayer.sign.rawValue + "'s Turn"
             } else {
                 titleLabel.text = secondPlayer.sign.rawValue + "'s Turn"
@@ -100,30 +103,31 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func checkResults() {
-        var resultP1 = true
-        var resultP2 = true
+        var firstWin = true
+        var secondWin = true
         
         //Horizontal Check
         for column in 0...Int(defaultGameDimension - 1) {
             for row in 0...Int(defaultGameDimension - 1) {
                 let cell = boardCollectionView.cellForItem(at: IndexPath.init(row: row, section: column)) as? BoardViewCell
                 if cell?.playerId != firstPlayer.playerId {
-                    resultP1 = false
+                    firstWin = false
                 }
                 if cell?.playerId != secondPlayer.playerId {
-                    resultP2 = false
+                    secondWin = false
                 }
             }
-                if resultP1 {
-                    firstPlayer.didHeWin = true
-                    return
-                } else if resultP2 {
-                    secondPlayer.didHeWin = true
-                    return
-                } else {
-                    resultP1 = true
-                    resultP2 = true
-                }
+            if firstWin {
+                gameStateMachine.gameState = .firstWin
+                return
+            } else if secondWin {
+                gameStateMachine.gameState = .secondWin
+                return
+            } else {
+                firstWin = true
+                secondWin = true
+            }
+            
         }
         
         //Vertical Check
@@ -131,22 +135,22 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
             for column in 0...Int(defaultGameDimension - 1) {
                 let cell = boardCollectionView.cellForItem(at: IndexPath.init(row: row, section: column)) as? BoardViewCell
                 if cell?.playerId != firstPlayer.playerId {
-                    resultP1 = false
+                    firstWin = false
                 }
                 if cell?.playerId != secondPlayer.playerId {
-                    resultP2 = false
+                    secondWin = false
                 }
             }
             
-            if resultP1 {
-                firstPlayer.didHeWin = true
+            if firstWin {
+                gameStateMachine.gameState = .firstWin
                 return
-            } else if resultP2 {
-                secondPlayer.didHeWin = true
+            } else if secondWin {
+                gameStateMachine.gameState = .secondWin
                 return
             } else {
-                resultP1 = true
-                resultP2 = true
+                firstWin = true
+                secondWin = true
             }
         }
         
@@ -154,45 +158,45 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
         for row in 0...Int(defaultGameDimension - 1) {
             let cell = boardCollectionView.cellForItem(at: IndexPath.init(row: row, section: row)) as?BoardViewCell
             if cell?.playerId != firstPlayer.playerId {
-                resultP1 = false
+                firstWin = false
                 return
             }
             
             if cell?.playerId != secondPlayer.playerId {
-                resultP2 = false
+                secondWin = false
                 return
             }
         }
-        if resultP1 {
-            firstPlayer.didHeWin = true
+        if firstWin {
+            gameStateMachine.gameState = .firstWin
             return
-        } else if resultP2 {
-            secondPlayer.didHeWin = true
+        } else if secondWin {
+            gameStateMachine.gameState = .secondWin
             return
         } else {
-            resultP1 = true
-            resultP2 = true
+            firstWin = true
+            secondWin = true
         }
         
         // Left Diagonal Check
         for row in 0...Int(defaultGameDimension - 1) {
             let cell = boardCollectionView.cellForItem(at: IndexPath.init(row: row, section: Int(defaultGameDimension - 1) - row)) as? BoardViewCell
             if cell?.playerId != firstPlayer.playerId {
-                resultP1 = false
+                firstWin = false
             }
             if cell?.playerId != secondPlayer.playerId {
-                resultP2 = false
+                secondWin = false
             }
         }
-        if resultP1 {
-            firstPlayer.didHeWin = true
+        if firstWin {
+            gameStateMachine.gameState = .firstWin
             return
-        } else if resultP2 {
-            secondPlayer.didHeWin = true
+        } else if secondWin {
+            gameStateMachine.gameState = .secondWin
             return
         } else {
-            resultP1 = true
-            resultP2 = true
+            firstWin = true
+            secondWin = true
         }
     }
     
